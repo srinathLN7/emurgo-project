@@ -1,9 +1,10 @@
 module Nim (startNim) where
-
--- import Text.Read
 import Board 
+import Text.Read
+import Control.Monad.Reader (ReaderT(runReaderT))
 
-data GameState = GameState {_nRows :: Row, _board :: Board, _currentPlayer :: Player} deriving Show
+
+
 data Player =  PLAYER_1 | PLAYER_2 deriving Show
 
 next :: Player -> Player
@@ -20,7 +21,7 @@ move :: Board -> Row -> Int -> Board
 move board row num = [if row == r then n - num else n |(r,n) <- zip [1..] board]
 
                                                         
---  MAIN GAME FUNCTION
+--  MAIN GAME LOGIC
 play :: Board -> Player -> IO ()
 play board player = do putBoard board
                        newline 
@@ -39,17 +40,18 @@ play board player = do putBoard board
                                   do putStrLn "ERROR: INVALID MOVE!!! Please try again"
                                      play board player                 
 
-
 startNim :: IO ()
 startNim = do newline  
-              putStrLn "**************************************************************************************** Welcome to the game of NIM ***************************************************************************************"
-              play initialB PLAYER_1 
-              --  newline
-              --  putStrLn "Enter the total number of rows in the board: "
-              --  x <- getLine
-              --  case (readMaybe x :: Maybe Int) of
-              --     Nothing -> do putStrLn "Please enter a valid number and try again."
-              --                   newline
-              --                   startNim
-              --     Just nRows  -> do putStrLn "Constructing the Nim game board"
-              --                       let initial = [nRows .. 1] in play initial Player_1  
+              putStrLn "**************************************************************************************** Welcome to the game of NIM ***************************************************************************************" 
+              newline
+              putStrLn "Enter the total number of rows in the board: "
+              x <- getLine
+              case (readMaybe x :: Maybe Int) of
+                  Nothing -> do putStrLn "Please enter a valid number and try again."
+                                newline
+                                startNim
+                  Just nRows  -> do  newline  
+                                     putStrLn "Constructing the Nim game board"
+                                     _  <- (runReaderT $ mkIBoard nRows) Config{_iBoard= reverse [1..nRows]}  
+                                     let iBoard = reverse [1..nRows] in 
+                                      play iBoard PLAYER_1  
