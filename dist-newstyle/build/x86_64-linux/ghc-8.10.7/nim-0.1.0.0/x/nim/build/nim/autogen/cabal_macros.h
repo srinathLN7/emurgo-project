@@ -10,6 +10,16 @@
   (major1) == 0 && (major2) <  1 || \
   (major1) == 0 && (major2) == 1 && (minor) <= 0)
 #endif /* MIN_VERSION_nim */
+/* package ansi-terminal-0.11.3 */
+#ifndef VERSION_ansi_terminal
+#define VERSION_ansi_terminal "0.11.3"
+#endif /* VERSION_ansi_terminal */
+#ifndef MIN_VERSION_ansi_terminal
+#define MIN_VERSION_ansi_terminal(major1,major2,minor) (\
+  (major1) <  0 || \
+  (major1) == 0 && (major2) <  11 || \
+  (major1) == 0 && (major2) == 11 && (minor) <= 3)
+#endif /* MIN_VERSION_ansi_terminal */
 /* package base-4.14.3.0 */
 #ifndef VERSION_base
 #define VERSION_base "4.14.3.0"
@@ -20,16 +30,6 @@
   (major1) == 4 && (major2) <  14 || \
   (major1) == 4 && (major2) == 14 && (minor) <= 3)
 #endif /* MIN_VERSION_base */
-/* package mtl-2.2.2 */
-#ifndef VERSION_mtl
-#define VERSION_mtl "2.2.2"
-#endif /* VERSION_mtl */
-#ifndef MIN_VERSION_mtl
-#define MIN_VERSION_mtl(major1,major2,minor) (\
-  (major1) <  2 || \
-  (major1) == 2 && (major2) <  2 || \
-  (major1) == 2 && (major2) == 2 && (minor) <= 2)
-#endif /* MIN_VERSION_mtl */
 
 /* tool gcc-9 */
 #ifndef TOOL_VERSION_gcc

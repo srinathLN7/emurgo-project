@@ -1,34 +1,60 @@
 module Board where
 
 import Text.Read
+import System.Console.ANSI
 
 
 -- GAME UTILITIES
 type Row = Int 
 type Board = [Row] 
 
--- newtype Config = Config {_iBoard :: Board} 
--- newtype Reader config a = Reader {runReader :: config -> a}
--- newtype StateT s m a = StateT { runStateT :: s -> m (a, s) }
--- mkIBoard :: Row -> StateT Config IO Config
--- mkIBoard mRows = return $ Config {_iBoard = reverse[1..mRows]}
+data Player =  PLAYER_1 | PLAYER_2 deriving Show
 
--- SCREEN UTILITIES
+next :: Player -> Player
+next PLAYER_1 = PLAYER_2
+next PLAYER_2 = PLAYER_1
+
+renderWelcome :: IO () 
+renderWelcome = do setSGR [SetColor Foreground Vivid Blue]
+                   Just (_, mcol) <- getTerminalSize     
+                   setCursorColumn (mcol `div` 4) >> putStrLn "*********************************** Welcome to the Variant NIM ***********************************" 
+                   setSGR [Reset]
+                           
+renderErrMsg :: IO ()
+renderErrMsg = do setSGR [SetColor Foreground Vivid Red]
+                  putStrLn "ERROR: INVALID MOVE!!! Please try again"      
+                  setSGR [Reset]      
+
+renderPlayerMsg :: Player -> IO ()
+renderPlayerMsg player = do setSGR [SetColor Foreground Vivid Yellow]    
+                            print ( "PLAYING now  - " ++ show player)
+                            setSGR[Reset]
+
+
+renderWinMsg :: Player -> IO ()
+renderWinMsg player = do setSGR [SetColor Foreground Vivid Green]
+                         putStrLn (show (next player) ++ " WINS!!!")
+                         newline 
+                         setSGR[Reset]
+
 putRow :: Row -> Int -> IO ()
-putRow row num = do putChar '\n'
+putRow row num = do setSGR [SetColor Foreground Vivid Blue]
+                    newline
                     putStr (show row ++ ": ")
                     print ( concat $ replicate num " * ")
+                    setSGR [Reset]    
 
 
 -- sequence_ :: [IO a] -> IO ()
 putBoard :: Board -> IO ()
-putBoard board = sequence_ [ putRow r b | (r,b) <- zip [1..] board]
+putBoard board = do Just (_, mcol) <- getTerminalSize
+                    setCursorColumn (mcol `div` 2) 
+                    sequence_ [ putRow r b | (r,b) <- zip [1..] board]
 
 
 newline :: IO ()
 newline = putChar '\n'
-
-
+                        
 getNumber :: Row -> String -> IO Int
 getNumber mRows prompt       = do putStrLn prompt
                                   x <- getLine                                           
