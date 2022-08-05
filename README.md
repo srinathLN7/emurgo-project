@@ -1,6 +1,25 @@
-# Nim
+# Nim 
 
-Nim -> Remove stars at end of single row. Player that empties the board first wins.
+Implementation of **variant of the game of Nim** in Haskell. It is played on a board comprising five numbered rows of stars, initially set up as follows:
+
+### Standard Nim 
+
+Two players then take it in turn to remove one or more stars from the end of a single row. The winner is the player who makes the board empty, that is who removes the final star of stars from the board.
+
+
+```
+1: "*****"
+
+2: "****"
+
+3: "***"
+
+4: "**"
+
+5: "*"
+
+```
+
 
 ### Output
 
@@ -99,3 +118,7 @@ Enter number of stars to remove: 1
 Player 1 wins!!!
 *Nim>  
 ```
+
+### Variant of the Game of Nim
+
+A standard Nim board always comprises of 5 Rows. In the **variant version**, we construct the Nim board with arbitrary number of rows as per the players choice. 

@@ -1,8 +1,6 @@
 module Nim (startNim) where
 import Board 
 import Text.Read
-import Control.Monad.Reader (ReaderT(runReaderT))
-
 
 
 data Player =  PLAYER_1 | PLAYER_2 deriving Show
@@ -22,23 +20,23 @@ move board row num = [if row == r then n - num else n |(r,n) <- zip [1..] board]
 
                                                         
 --  MAIN GAME LOGIC
-play :: Board -> Player -> IO ()
-play board player = do putBoard board
-                       newline 
-                       if finished board then
-                           putStrLn (show (next player) ++ " WINS!!!")
-                       else 
-                           do print ( "PLAYING now  - " ++ show player)
-                              newline
-                              row <- getNumber "Enter row number: " 
-                              newline   
-                              num <- getNumber "Enter number of stars to remove: "
-                              newline  
-                              if valid board row num then
-                                play (move board row num) (next player)
-                              else
-                                  do putStrLn "ERROR: INVALID MOVE!!! Please try again"
-                                     play board player                 
+play :: Row -> Board -> Player -> IO ()
+play mRows board player = do putBoard board
+                             newline 
+                             if finished board then
+                              putStrLn (show (next player) ++ " WINS!!!")
+                             else 
+                                do print ( "PLAYING now  - " ++ show player)
+                                   newline
+                                   row <- getNumber mRows "Enter row number: " 
+                                   newline   
+                                   num <- getNumber mRows "Enter number of stars to remove: "
+                                   newline  
+                                   if valid board row num then
+                                        play mRows (move board row num) (next player)
+                                    else
+                                        do putStrLn "ERROR: INVALID MOVE!!! Please try again"
+                                           play mRows board player                 
 
 startNim :: IO ()
 startNim = do newline  
@@ -51,7 +49,6 @@ startNim = do newline
                                 newline
                                 startNim
                   Just nRows  -> do  newline  
-                                     putStrLn "Constructing the Nim game board"
-                                     _  <- (runReaderT $ mkIBoard nRows) Config{_iBoard= reverse [1..nRows]}  
+                                     putStrLn "Constructing the Nim game board"  
                                      let iBoard = reverse [1..nRows] in 
-                                      play iBoard PLAYER_1  
+                                      play nRows iBoard PLAYER_1  

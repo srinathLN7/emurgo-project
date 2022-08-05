@@ -1,23 +1,17 @@
 module Board where
 
 import Text.Read
-import Control.Monad.Reader
+
 
 -- GAME UTILITIES
 type Row = Int 
 type Board = [Row] 
 
-newtype Config = Config {_iBoard :: Board} 
-
-
+-- newtype Config = Config {_iBoard :: Board} 
 -- newtype Reader config a = Reader {runReader :: config -> a}
-
-mkIBoard :: Row -> ReaderT Config IO Config
-mkIBoard mRows = return $ Config {_iBoard = reverse[1..mRows]}
-
-
-initBoard :: Board
-initBoard = [5,4,3,2,1]
+-- newtype StateT s m a = StateT { runStateT :: s -> m (a, s) }
+-- mkIBoard :: Row -> StateT Config IO Config
+-- mkIBoard mRows = return $ Config {_iBoard = reverse[1..mRows]}
 
 -- SCREEN UTILITIES
 putRow :: Row -> Int -> IO ()
@@ -35,18 +29,18 @@ newline :: IO ()
 newline = putChar '\n'
 
 
-getNumber :: String -> IO Int
-getNumber prompt       = do putStrLn prompt
-                            x <- getLine
-                                                                
-                            case (readMaybe x :: Maybe Int) of
-                             Nothing -> do putStrLn "Invalid input. Only numbers accepted. Please try again"
-                                           newline     
-                                           getNumber prompt 
-                             Just y  -> case prompt of  
-                                            "Enter row number: " -> if y `elem` initBoard then
-                                                         return y
-                                                         else do putStrLn "Invalid row number. Please try again."
-                                                                 newline   
-                                                                 getNumber "Enter row number: " 
-                                            _ -> return y   
+getNumber :: Row -> String -> IO Int
+getNumber mRows prompt       = do putStrLn prompt
+                                  x <- getLine                                           
+                                  case (readMaybe x :: Maybe Int) of
+                                    Nothing -> do putStrLn "Invalid input. Only numbers accepted. Please try again"
+                                                  newline     
+                                                  getNumber mRows prompt 
+                                    Just y  -> case prompt of  
+                                                "Enter row number: " -> let initBoard = reverse[1..mRows] in 
+                                                                        if y `elem` initBoard then
+                                                                        return y        
+                                                                        else do putStrLn "Invalid row number. Please try again."
+                                                                                newline   
+                                                                                getNumber mRows "Enter row number: " 
+                                                _ -> return y   
