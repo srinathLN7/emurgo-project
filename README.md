@@ -34,7 +34,5 @@ cabal run
 
 ### Output
 
-![plot](./nim.jpg)
-
-See complete output [here](https://github.com/srinathLN7/emurgo-project/tree/main/app)
-
+* [Complete output](https://github.com/srinathLN7/emurgo-project/tree/main/app)
+* [Screenshot](https://github.com/srinathLN7/emurgo-project/tree/main/img)
