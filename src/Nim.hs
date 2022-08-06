@@ -27,8 +27,9 @@ finished:: Board -> Bool
 finished = all (==0)
 
 -- valid :: returns if the move made by a player is valid or not
+-- num represents the number of stars to be removed
 valid :: Board -> Row -> Int -> Bool
-valid board row num =  board !! (row -1) >= num  
+valid board row num = num > 0 && (board !! (row -1) >= num)    
 
 -- move :: returns a new board after the current player has finished playing
 move :: Board -> Row -> Int -> Board 
