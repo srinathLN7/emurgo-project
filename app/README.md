@@ -6,21 +6,20 @@ A variant of the Nim game where players can pick the board of their choice.
 
 ```
 cabal run
-Resolving dependencies...
 Build profile: -w ghc-8.10.7 -O1
 In order, the following will be built (use -v for more details):
  - nim-0.1.0.0 (exe:nim) (file src/Board.hs changed)
 Preprocessing executable 'nim' for nim-0.1.0.0..
 Building executable 'nim' for nim-0.1.0.0..
 [1 of 3] Compiling Board            ( src/Board.hs, /home/srinathln7/Desktop/emurgo-project/dist-newstyle/build/x86_64-linux/ghc-8.10.7/nim-0.1.0.0/x/nim/build/nim/nim-tmp/Board.o )
-[2 of 3] Compiling Nim              ( src/Nim.hs, /home/srinathln7/Desktop/emurgo-project/dist-newstyle/build/x86_64-linux/ghc-8.10.7/nim-0.1.0.0/x/nim/build/nim/nim-tmp/Nim.o )
-[3 of 3] Compiling Main             ( app/Main.hs, /home/srinathln7/Desktop/emurgo-project/dist-newstyle/build/x86_64-linux/ghc-8.10.7/nim-0.1.0.0/x/nim/build/nim/nim-tmp/Main.o ) [Nim changed]
+[2 of 3] Compiling Nim              ( src/Nim.hs, /home/srinathln7/Desktop/emurgo-project/dist-newstyle/build/x86_64-linux/ghc-8.10.7/nim-0.1.0.0/x/nim/build/nim/nim-tmp/Nim.o ) [Board changed]
 Linking /home/srinathln7/Desktop/emurgo-project/dist-newstyle/build/x86_64-linux/ghc-8.10.7/nim-0.1.0.0/x/nim/build/nim/nim ...
 
-************************************************************************************ Welcome to the game of NIM ***************************************************************************************
+***********************************************************************************************************************************************************************************************************
+                                                                   Welcome to the Variant NIM game
+***********************************************************************************************************************************************************************************************************
 
-
-Enter the total number of rows in the board: 
+Enter the total number of rows you want in the board: 
 7
 
 Constructing the Nim game board
@@ -39,17 +38,16 @@ Constructing the Nim game board
 
 7: " * "
 
-"PLAYING now  - PLAYER_1"
+                                                                   "PLAYING now  - PLAYER_1"
 
 Enter row number: 
-7
+1
 
 Enter number of stars to remove: 
-2
+4
 
-ERROR: INVALID MOVE!!! Please try again
 
-1: " *  *  *  *  *  *  * "
+1: " *  *  * "
 
 2: " *  *  *  *  *  * "
 
@@ -63,7 +61,30 @@ ERROR: INVALID MOVE!!! Please try again
 
 7: " * "
 
-"PLAYING now  - PLAYER_1"
+                                                                   "PLAYING now  - PLAYER_2"
+
+Enter row number: 
+2
+
+Enter number of stars to remove: 
+3
+
+
+1: " *  *  * "
+
+2: " *  *  * "
+
+3: " *  *  *  *  * "
+
+4: " *  *  *  * "
+
+5: " *  *  * "
+
+6: " *  * "
+
+7: " * "
+
+                                                                   "PLAYING now  - PLAYER_1"
 
 Enter row number: 
 7
@@ -72,9 +93,9 @@ Enter number of stars to remove:
 1
 
 
-1: " *  *  *  *  *  *  * "
+1: " *  *  * "
 
-2: " *  *  *  *  *  * "
+2: " *  *  * "
 
 3: " *  *  *  *  * "
 
@@ -86,18 +107,18 @@ Enter number of stars to remove:
 
 7: ""
 
-"PLAYING now  - PLAYER_2"
+                                                                   "PLAYING now  - PLAYER_2"
 
 Enter row number: 
-6
+1
 
 Enter number of stars to remove: 
-2
+3
 
 
-1: " *  *  *  *  *  *  * "
+1: ""
 
-2: " *  *  *  *  *  * "
+2: " *  *  * "
 
 3: " *  *  *  *  * "
 
@@ -105,34 +126,57 @@ Enter number of stars to remove:
 
 5: " *  *  * "
 
-6: ""
+6: " *  * "
 
 7: ""
 
-"PLAYING now  - PLAYER_1"
+                                                                   "PLAYING now  - PLAYER_1"
 
 Enter row number: 
-5
+2
 
 Enter number of stars to remove: 
 3
 
 
-1: " *  *  *  *  *  *  * "
+1: ""
 
-2: " *  *  *  *  *  * "
+2: ""
 
 3: " *  *  *  *  * "
 
 4: " *  *  *  * "
 
-5: ""
+5: " *  *  * "
 
-6: ""
+6: " *  * "
 
 7: ""
 
-"PLAYING now  - PLAYER_2"
+                                                                   "PLAYING now  - PLAYER_2"
+
+Enter row number: 
+3
+
+Enter number of stars to remove: 
+5
+
+
+1: ""
+
+2: ""
+
+3: ""
+
+4: " *  *  *  * "
+
+5: " *  *  * "
+
+6: " *  * "
+
+7: ""
+
+                                                                   "PLAYING now  - PLAYER_1"
 
 Enter row number: 
 4
@@ -141,143 +185,50 @@ Enter number of stars to remove:
 4
 
 
-1: " *  *  *  *  *  *  * "
+1: ""
 
-2: " *  *  *  *  *  * "
+2: ""
 
-3: " *  *  *  *  * "
+3: ""
 
 4: ""
 
-5: ""
+5: " *  *  * "
 
-6: ""
+6: " *  * "
 
 7: ""
 
-"PLAYING now  - PLAYER_1"
+                                                                   "PLAYING now  - PLAYER_2"
 
 Enter row number: 
-1
+5
 
 Enter number of stars to remove: 
-4
+3
 
 
-1: " *  *  * "
+1: ""
 
-2: " *  *  *  *  *  * "
+2: ""
 
-3: " *  *  *  *  * "
+3: ""
 
 4: ""
 
 5: ""
 
-6: ""
+6: " *  * "
 
 7: ""
 
-"PLAYING now  - PLAYER_2"
+                                                                   "PLAYING now  - PLAYER_1"
 
 Enter row number: 
 6
 
 Enter number of stars to remove: 
-1
-
-ERROR: INVALID MOVE!!! Please try again
-
-1: " *  *  * "
-
-2: " *  *  *  *  *  * "
-
-3: " *  *  *  *  * "
-
-4: ""
-
-5: ""
-
-6: ""
-
-7: ""
-
-"PLAYING now  - PLAYER_2"
-
-Enter row number: 
-1
-
-Enter number of stars to remove: 
-3
-
-
-1: ""
-
-2: " *  *  *  *  *  * "
-
-3: " *  *  *  *  * "
-
-4: ""
-
-5: ""
-
-6: ""
-
-7: ""
-
-"PLAYING now  - PLAYER_1"
-
-Enter row number: 
-3
-
-Enter number of stars to remove: 
-5
-
-
-1: ""
-
-2: " *  *  *  *  *  * "
-
-3: ""
-
-4: ""
-
-5: ""
-
-6: ""
-
-7: ""
-
-"PLAYING now  - PLAYER_2"
-
-Enter row number: 
 2
-
-Enter number of stars to remove: 
-5
-
-
-1: ""
-
-2: " * "
-
-3: ""
-
-4: ""
-
-5: ""
-
-6: ""
-
-7: ""
-
-"PLAYING now  - PLAYER_1"
-
-Enter row number: 
-2
-
-Enter number of stars to remove: 
-1
 
 
 1: ""
@@ -294,6 +245,6 @@ Enter number of stars to remove:
 
 7: ""
 
-PLAYER_1 WINS!!!
+                                                                   PLAYER_1 WINS !!!
 
 ```

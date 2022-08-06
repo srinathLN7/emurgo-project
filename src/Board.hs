@@ -4,21 +4,22 @@ import Text.Read
 import System.Console.ANSI
 import Control.Monad
 
-
--- GAME UTILITIES
+-- BOARD UTILITIES
 type Row = Int 
 type Board = [Row] 
 
 data Player =  PLAYER_1 | PLAYER_2 deriving Show
 
+-- next: returns the player who has to play next
 next :: Player -> Player
 next PLAYER_1 = PLAYER_2
 next PLAYER_2 = PLAYER_1
 
-
+-- renderPoint :: displays *** on the screen 
 renderPoint :: (Int, Int) -> IO ()
 renderPoint (r, c) = setCursorPosition r c >> putChar '*'
 
+-- renderWelcome :: displays Welcome msg at the start of the game
 renderWelcome :: IO () 
 renderWelcome = do setSGR [SetColor Foreground Vivid Blue]
                    Just (_, mcol) <- getTerminalSize
@@ -29,12 +30,13 @@ renderWelcome = do setSGR [SetColor Foreground Vivid Blue]
                    setSGR [Reset]
 
 
+-- renderErrMsg :: displays the error msg incase of invalid inputs 
 renderErrMsg :: String -> IO ()
 renderErrMsg err = do setSGR [SetColor Foreground Vivid Red]
                       putStrLn err      
                       setSGR [Reset]      
 
-
+-- renderPlayerMsg :: displays the player who has to play next
 renderPlayerMsg :: Player -> IO ()
 renderPlayerMsg player = do setSGR [SetColor Foreground Vivid Yellow]
                             Just (_, mcol) <- getTerminalSize
@@ -42,7 +44,7 @@ renderPlayerMsg player = do setSGR [SetColor Foreground Vivid Yellow]
                             print ( "PLAYING now  - " ++ show player)
                             setSGR[Reset]
 
-
+-- renderWinMsg :: displays who won the game at the end
 renderWinMsg :: Player -> IO ()
 renderWinMsg player = do setSGR [SetColor Foreground Vivid Green]
                          Just (_, mcol) <- getTerminalSize
@@ -51,7 +53,7 @@ renderWinMsg player = do setSGR [SetColor Foreground Vivid Green]
                          newline 
                          setSGR[Reset]
 
-
+-- putRow :: displays the number of stars in a given row
 putRow :: Row -> Int -> IO ()
 putRow row num = do setSGR [SetColor Foreground Vivid Blue]
                     newline
@@ -60,14 +62,16 @@ putRow row num = do setSGR [SetColor Foreground Vivid Blue]
                     setSGR [Reset]    
 
 
--- sequence_ :: [IO a] -> IO ()
+-- putBoard :: displays the Nim board at a given instance
 putBoard :: Board -> IO ()
 putBoard board = sequence_ [ putRow r b | (r,b) <- zip [1..] board]
+-- sequence_ :: [IO a] -> IO ()
 
-
+-- newline :: inserts a new line
 newline :: IO ()
 newline = putChar '\n'
                         
+-- getNumber : get the player's input - the row number and the number of stars to be removed at each turn                         
 getNumber :: Row -> String -> IO Int
 getNumber mRows prompt       = do putStrLn prompt
                                   x <- getLine                                           

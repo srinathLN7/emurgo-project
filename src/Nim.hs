@@ -2,7 +2,7 @@ module Nim (startNim) where
 import Board 
 import Text.Read
                                                         
---  MAIN GAME LOGIC
+-- play :: MAIN GAME LOGIC 
 play :: Row -> Board -> Player -> IO ()
 play mRows board player = do putBoard board
                              newline 
@@ -22,15 +22,19 @@ play mRows board player = do putBoard board
                                            play mRows board player                 
 
 
+-- finished :: returns true if the board is empty
 finished:: Board -> Bool
 finished = all (==0)
 
+-- valid :: returns if the move made by a player is valid or not
 valid :: Board -> Row -> Int -> Bool
 valid board row num =  board !! (row -1) >= num  
 
+-- move :: returns a new board after the current player has finished playing
 move :: Board -> Row -> Int -> Board 
 move board row num = [if row == r then n - num else n |(r,n) <- zip [1..] board]
 
+-- startNim :: starts the variant Nim game
 startNim :: IO ()
 startNim = do newline  
               renderWelcome 
